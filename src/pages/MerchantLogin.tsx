@@ -1,8 +1,24 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const MerchantLogin = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [shopType, setShopType] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Basic validation
+    if (email && password && shopType) {
+      navigate("/merchant-dashboard");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -19,15 +35,17 @@ const MerchantLogin = () => {
             <p className="text-muted-foreground">Sign in to manage your store</p>
           </div>
           
-          <div className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Email or Phone
+                Email
               </label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
-                placeholder="Enter your email or phone number"
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
               />
             </div>
             
@@ -35,31 +53,55 @@ const MerchantLogin = () => {
               <label className="block text-sm font-medium text-foreground mb-2">
                 Password
               </label>
-              <input
+              <Input
                 type="password"
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
+                required
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Select Shop Type
+              </label>
+              <Select value={shopType} onValueChange={setShopType} required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose your business type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="food-restaurant">Food Restaurant</SelectItem>
+                  <SelectItem value="dress-shop">Dress Shop</SelectItem>
+                  <SelectItem value="electronics-shop">Electronics Shop</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             
-            <Button variant="merchant" size="lg" className="w-full">
-              Sign In
+            <Button 
+              type="submit" 
+              variant="merchant" 
+              size="lg" 
+              className="w-full"
+              disabled={!email || !password || !shopType}
+            >
+              Login to Dashboard
             </Button>
+          </form>
             
-            <div className="text-center">
-              <a href="#" className="text-sm text-primary hover:underline">
-                Forgot your password?
-              </a>
-            </div>
-            
-            <div className="text-center border-t pt-6">
-              <p className="text-sm text-muted-foreground mb-4">
-                New to QuickLink?
-              </p>
-              <Button variant="outline" size="lg" className="w-full">
-                Register Your Store
-              </Button>
-            </div>
+          <div className="text-center mt-6">
+            <a href="#" className="text-sm text-primary hover:underline">
+              Forgot your password?
+            </a>
+          </div>
+          
+          <div className="text-center border-t pt-6 mt-6">
+            <p className="text-sm text-muted-foreground mb-4">
+              New to QuickLink?
+            </p>
+            <Button variant="outline" size="lg" className="w-full">
+              Register Your Store
+            </Button>
           </div>
         </div>
       </div>
