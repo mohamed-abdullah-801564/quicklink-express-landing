@@ -17,26 +17,35 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Modern delivery app colors */
+    --primary: 14 100% 60%; /* Vibrant Orange #FF6B35 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 14 100% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 122 39% 49%; /* Fresh Green #4CAF50 */
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 45 100% 60%; /* Golden accent */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 14 100% 60%;
 
-    --radius: 0.5rem;
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(14 100% 60%), hsl(14 100% 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(122 39% 49%), hsl(122 39% 59%));
+    --gradient-hero: linear-gradient(135deg, hsl(14 100% 60% / 0.9), hsl(122 39% 49% / 0.9));
+    --shadow-elegant: 0 10px 40px -10px hsl(14 100% 60% / 0.3);
+    --shadow-glow: 0 0 40px hsl(14 100% 70% / 0.4);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
