@@ -17,13 +17,13 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Modern delivery app colors */
-    --primary: 14 100% 60%; /* Vibrant Orange #FF6B35 */
+    /* Swiggy/Zomato inspired colors */
+    --primary: 24 95% 53%; /* Swiggy Orange #FF5722 */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 14 100% 70%;
+    --primary-glow: 39 100% 50%;
 
-    --secondary: 122 39% 49%; /* Fresh Green #4CAF50 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 39 100% 50%; /* Golden Yellow #FFC107 */
+    --secondary-foreground: 0 0% 9%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -36,14 +36,15 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 14 100% 60%;
+    --ring: 24 95% 53%;
 
-    /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(14 100% 60%), hsl(14 100% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(122 39% 49%), hsl(122 39% 59%));
-    --gradient-hero: linear-gradient(135deg, hsl(14 100% 60% / 0.9), hsl(122 39% 49% / 0.9));
-    --shadow-elegant: 0 10px 40px -10px hsl(14 100% 60% / 0.3);
-    --shadow-glow: 0 0 40px hsl(14 100% 70% / 0.4);
+    /* Swiggy/Zomato inspired design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(24 95% 53%), hsl(39 100% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(39 100% 50%), hsl(24 95% 53%));
+    --gradient-hero: linear-gradient(135deg, hsl(24 95% 53% / 0.9), hsl(39 100% 50% / 0.8));
+    --shadow-elegant: 0 10px 30px -10px hsl(24 95% 53% / 0.3);
+    --shadow-glow: 0 0 40px hsl(24 95% 53% / 0.4);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.1);
 
     --radius: 0.75rem;
 
