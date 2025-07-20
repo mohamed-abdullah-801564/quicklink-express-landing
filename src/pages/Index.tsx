@@ -1,16 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Store, Truck, ShoppingBag, Utensils, Shirt, CreditCard, Clock, Shield, Users, Award } from "lucide-react";
 import { Link } from "react-router-dom";
+import { usePageAnimation } from "@/hooks/use-page-animation";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Index = () => {
+  const isVisible = usePageAnimation(1000);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(24, 95%, 53%, 0.85), rgba(39, 100%, 50%, 0.75)), url(${heroBg})`
+          backgroundImage: `linear-gradient(rgba(24, 95%, 53%, 0.85), rgba(39, 100%, 50%, 0.75)), url(${heroBg})`,
+          backgroundAttachment: 'fixed',
+          willChange: 'transform'
         }}
       >
         <div className="container mx-auto px-4 text-center text-white animate-fade-in">

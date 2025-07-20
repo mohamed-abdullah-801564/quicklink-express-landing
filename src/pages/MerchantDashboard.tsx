@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ArrowLeft, Store, Package, Settings, Edit, Trash2, Plus, User, LogOut, Eye, EyeOff } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { usePageAnimation } from "@/hooks/use-page-animation";
+import { getProductImage } from "@/utils/productImages";
 
 interface Product {
   id: string;
@@ -25,7 +27,8 @@ interface ShopDetails {
 
 const MerchantDashboard = () => {
   const location = useLocation();
-  const merchantName = "John's Store"; // This would come from login state
+  const [merchantName, setMerchantName] = useState("John's Store"); // This would come from login state
+  const isVisible = usePageAnimation(1000);
   
   const [activeTab, setActiveTab] = useState("shop-details");
   const [products, setProducts] = useState<Product[]>([]);
@@ -78,10 +81,15 @@ const MerchantDashboard = () => {
     setProducts(products.filter(p => p.id !== id));
   };
 
+  const handleSaveShopDetails = () => {
+    // Update the merchant name for the greeting
+    setMerchantName(shopDetails.name);
+  };
+
   const renderShopDetails = () => (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground">Shop Details</h2>
-      <Card>
+      <Card className="transition-all duration-300 hover:shadow-lg">
         <CardHeader>
           <CardTitle>Business Information</CardTitle>
         </CardHeader>
@@ -92,12 +100,13 @@ const MerchantDashboard = () => {
               value={shopDetails.name}
               onChange={(e) => setShopDetails({...shopDetails, name: e.target.value})}
               placeholder="Enter shop name"
+              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">Shop Type</label>
             <Select value={shopDetails.type} onValueChange={(value) => setShopDetails({...shopDetails, type: value})}>
-              <SelectTrigger>
+              <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -113,6 +122,7 @@ const MerchantDashboard = () => {
               value={shopDetails.location}
               onChange={(e) => setShopDetails({...shopDetails, location: e.target.value})}
               placeholder="Enter shop location"
+              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
             />
           </div>
           <div>
@@ -121,9 +131,10 @@ const MerchantDashboard = () => {
               value={shopDetails.contact}
               onChange={(e) => setShopDetails({...shopDetails, contact: e.target.value})}
               placeholder="Enter contact number"
+              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
             />
           </div>
-          <Button variant="merchant" className="w-full">
+          <Button variant="merchant" className="w-full transition-all duration-200 hover:scale-105" onClick={handleSaveShopDetails}>
             Save Changes
           </Button>
         </CardContent>
@@ -191,20 +202,44 @@ const MerchantDashboard = () => {
       </div>
 
       {products.length === 0 ? (
-        <Card>
-          <CardContent className="py-8 text-center">
-            <Package className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">No products added yet. Click "Add Product" to get started.</p>
+        <Card className="transition-all duration-300 hover:shadow-lg">
+          <CardContent className="py-12 text-center">
+            <Package className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+            <h3 className="text-lg font-semibold mb-2">No products yet</h3>
+            <p className="text-muted-foreground mb-4">Start building your inventory by adding your first product</p>
+            <Button onClick={() => setIsAddProductOpen(true)} variant="merchant" className="transition-all duration-200 hover:scale-105">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Your First Product
+            </Button>
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products.map((product) => (
-            <Card key={product.id} className="hover:shadow-lg transition-shadow">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product, index) => (
+            <Card 
+              key={product.id} 
+              className={`relative overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 ${
+                isVisible ? 'animate-fade-in opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                animationDelay: `${index * 100}ms`
+              }}
+            >
+              <div className="aspect-video relative overflow-hidden bg-muted">
+                <img
+                  src={getProductImage(product.name)}
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
+                />
+                <div className={`absolute top-2 right-2 w-3 h-3 rounded-full ${
+                  product.availability ? "bg-green-500" : "bg-red-500"
+                } ring-2 ring-white`} />
+              </div>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-semibold text-foreground">{product.name}</h3>
-                  <div className="flex gap-2">
+                  <h3 className="font-semibold text-foreground leading-tight">{product.name}</h3>
+                  <div className="flex gap-1">
                     <Button
                       size="sm"
                       variant="outline"
@@ -212,6 +247,7 @@ const MerchantDashboard = () => {
                         setEditingProduct(product);
                         setIsEditProductOpen(true);
                       }}
+                      className="h-8 w-8 p-0 transition-all duration-200 hover:scale-110"
                     >
                       <Edit className="h-3 w-3" />
                     </Button>
@@ -219,6 +255,7 @@ const MerchantDashboard = () => {
                       size="sm"
                       variant="destructive"
                       onClick={() => handleDeleteProduct(product.id)}
+                      className="h-8 w-8 p-0 transition-all duration-200 hover:scale-110"
                     >
                       <Trash2 className="h-3 w-3" />
                     </Button>
@@ -378,7 +415,7 @@ const MerchantDashboard = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className={`min-h-screen flex w-full transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         <Sidebar className="w-64">
           <SidebarContent>
             <div className="p-4 border-b">

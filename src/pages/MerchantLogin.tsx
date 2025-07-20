@@ -4,12 +4,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { usePageAnimation } from "@/hooks/use-page-animation";
 
 const MerchantLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [shopType, setShopType] = useState("");
+  const isVisible = usePageAnimation(1000);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ const MerchantLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className={`min-h-screen bg-background flex items-center justify-center p-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
       <div className="w-full max-w-md">
         <div className="mb-8">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
