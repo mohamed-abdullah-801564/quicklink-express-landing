@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Store, Truck, ShoppingBag, Utensils, Shirt, CreditCard, Clock, Shield, Users, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageAnimation } from "@/hooks/use-page-animation";
-import foodDeliveryHero from "@/assets/food-delivery-hero.jpg";
+import deliveryPersonHero from "@/assets/delivery-person-hero.jpg";
 
 // Preload the hero image for instant loading
 const preloadImage = new Image();
-preloadImage.src = foodDeliveryHero;
+preloadImage.src = deliveryPersonHero;
 
 const Index = () => {
   const isVisible = usePageAnimation(1000);
@@ -17,7 +17,7 @@ const Index = () => {
       <section 
         className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(${foodDeliveryHero})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(${deliveryPersonHero})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
