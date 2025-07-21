@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Store, Truck, ShoppingBag, Utensils, Shirt, CreditCard, Clock, Shield, Users, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageAnimation } from "@/hooks/use-page-animation";
-import heroBg from "@/assets/hero-bg.jpg";
+import urbanDeliveryHero from "@/assets/urban-delivery-hero.jpg";
+
+// Preload the hero image for instant loading
+const preloadImage = new Image();
+preloadImage.src = urbanDeliveryHero;
 
 const Index = () => {
   const isVisible = usePageAnimation(1000);
@@ -13,26 +17,27 @@ const Index = () => {
       <section 
         className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(24, 95%, 53%, 0.85), rgba(39, 100%, 50%, 0.75)), url(${heroBg})`,
-          backgroundAttachment: 'fixed',
-          willChange: 'transform'
+          backgroundImage: `linear-gradient(rgba(24, 95%, 53%, 0.8), rgba(39, 100%, 50%, 0.7)), url(${urbanDeliveryHero})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="container mx-auto px-4 text-center text-white animate-fade-in">
+        <div className={`container mx-auto px-4 text-center text-white transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-scale-in">
-              Quick<span className="text-yellow-300">Link</span>
+            <h1 className={`text-5xl md:text-7xl font-bold mb-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              Quick<span className="text-secondary">Link</span>
             </h1>
             
-            <p className="text-xl md:text-2xl mb-12 text-gray-100 font-medium leading-relaxed">
+            <p className={`text-xl md:text-2xl mb-12 text-white font-medium leading-relaxed transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               Order Anything, Delivered Fast – Food, Clothes, and More
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-2xl mx-auto">
+            <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center max-w-2xl mx-auto transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <Link to="/merchant-login" className="w-full sm:w-auto">
                 <Button 
                   size="lg"
-                  className="w-full sm:w-auto min-w-64 bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg py-6"
+                  className="w-full sm:w-auto min-w-64 bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-elegant hover:shadow-glow font-semibold text-lg py-6"
                 >
                   <Store className="h-6 w-6 mr-2" />
                   Merchant Login
@@ -43,7 +48,7 @@ const Index = () => {
               <Link to="/delivery-login" className="w-full sm:w-auto">
                 <Button 
                   size="lg"
-                  className="w-full sm:w-auto min-w-64 bg-gray-900 text-white hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg py-6"
+                  className="w-full sm:w-auto min-w-64 bg-secondary text-foreground hover:bg-secondary/90 hover:scale-105 transition-all duration-300 shadow-elegant hover:shadow-glow font-semibold text-lg py-6"
                 >
                   <Truck className="h-6 w-6 mr-2" />
                   Delivery Partner
@@ -58,7 +63,7 @@ const Index = () => {
       {/* Our Services Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Our Services
             </h2>

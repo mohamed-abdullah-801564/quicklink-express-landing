@@ -11,12 +11,13 @@ const MerchantLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [shopType, setShopType] = useState("");
+  const [merchantCode, setMerchantCode] = useState("");
   const isVisible = usePageAnimation(1000);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Basic validation
-    if (email && password && shopType) {
+    if (email && password && shopType && merchantCode) {
       navigate("/merchant-dashboard");
     }
   };
@@ -79,13 +80,26 @@ const MerchantLogin = () => {
                 </SelectContent>
               </Select>
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Merchant Code
+              </label>
+              <Input
+                type="text"
+                value={merchantCode}
+                onChange={(e) => setMerchantCode(e.target.value)}
+                placeholder="Enter your unique merchant code"
+                required
+              />
+            </div>
             
             <Button 
               type="submit" 
               variant="merchant" 
               size="lg" 
               className="w-full"
-              disabled={!email || !password || !shopType}
+              disabled={!email || !password || !shopType || !merchantCode}
             >
               Login to Dashboard
             </Button>
