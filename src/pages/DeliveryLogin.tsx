@@ -1,10 +1,26 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { usePageAnimation } from "@/hooks/use-page-animation";
+import deliveryPartnerHero from "@/assets/delivery-partner-hero.jpg";
+
+// Preload the hero image for instant loading
+const preloadImage = new Image();
+preloadImage.src = deliveryPartnerHero;
 
 const DeliveryLogin = () => {
+  const isVisible = usePageAnimation(1000);
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div 
+      className={`min-h-screen relative flex items-center justify-center p-4 bg-cover bg-center transition-opacity duration-1000 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url(${deliveryPartnerHero})`,
+      }}
+    >
       <div className="w-full max-w-md">
         <div className="mb-8">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
@@ -13,7 +29,7 @@ const DeliveryLogin = () => {
           </Link>
         </div>
         
-        <div className="bg-card rounded-lg shadow-elegant p-8 border">
+        <div className="bg-card/90 backdrop-blur-sm rounded-lg shadow-elegant p-8 border border-white/20">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-foreground mb-2">Delivery Partner Login</h1>
             <p className="text-muted-foreground">Sign in to start delivering</p>
@@ -22,12 +38,12 @@ const DeliveryLogin = () => {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Phone Number
+                Email Address
               </label>
-              <input
-                type="tel"
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-secondary bg-background"
-                placeholder="Enter your phone number"
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                className="transition-all duration-200 focus:scale-105"
               />
             </div>
             
@@ -35,16 +51,29 @@ const DeliveryLogin = () => {
               <label className="block text-sm font-medium text-foreground mb-2">
                 Password
               </label>
-              <input
+              <Input
                 type="password"
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-secondary bg-background"
                 placeholder="Enter your password"
+                className="transition-all duration-200 focus:scale-105"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Partner Code
+              </label>
+              <Input
+                type="text"
+                placeholder="Enter your partner code"
+                className="transition-all duration-200 focus:scale-105"
               />
             </div>
             
-            <Button variant="delivery" size="lg" className="w-full">
-              Start Delivering
-            </Button>
+            <Link to="/delivery-dashboard">
+              <Button variant="delivery" size="lg" className="w-full transition-all duration-200 hover:scale-105">
+                Start Delivering
+              </Button>
+            </Link>
             
             <div className="text-center">
               <a href="#" className="text-sm text-secondary hover:underline">
