@@ -48,14 +48,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground mb-2">Profile</h1>
-        <p className="text-muted-foreground">Manage your delivery partner information</p>
+    <div className="space-y-8">
+      <div className="animate-slide-up">
+        <h1 className="text-3xl font-bold text-foreground mb-3">Profile</h1>
+        <p className="text-muted-foreground text-lg">Manage your delivery partner information</p>
       </div>
 
       {/* Profile Header */}
-      <Card className="hover:shadow-lg transition-all duration-200">
+      <Card className="hover:shadow-elegant transition-all duration-300 hover:scale-[1.01] animate-slide-up border-l-4 border-l-primary">
         <CardContent className="pt-6">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <Avatar className="h-24 w-24">
@@ -107,9 +107,9 @@ const Profile = () => {
         </CardContent>
       </Card>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2">
         {/* Personal Information */}
-        <Card className="hover:shadow-lg transition-all duration-200">
+        <Card className="hover:shadow-elegant transition-all duration-300 hover:scale-[1.02] animate-slide-up border-l-4 border-l-secondary" style={{ animationDelay: '100ms' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="h-5 w-5" />
@@ -156,7 +156,7 @@ const Profile = () => {
         </Card>
 
         {/* Vehicle Information */}
-        <Card className="hover:shadow-lg transition-all duration-200">
+        <Card className="hover:shadow-elegant transition-all duration-300 hover:scale-[1.02] animate-slide-up border-l-4 border-l-accent" style={{ animationDelay: '200ms' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Bike className="h-5 w-5" />
@@ -206,33 +206,33 @@ const Profile = () => {
       </div>
 
       {/* Statistics */}
-      <Card className="hover:shadow-lg transition-all duration-200">
+      <Card className="hover:shadow-elegant transition-all duration-300 hover:scale-[1.01] animate-slide-up" style={{ animationDelay: '300ms' }}>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-xl font-bold">
             <Calendar className="h-5 w-5" />
             Performance Statistics
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-4">
-            <div className="text-center p-4 rounded-lg bg-primary/10">
-              <div className="text-2xl font-bold text-primary">{profileStats.totalDeliveries}</div>
-              <p className="text-sm text-muted-foreground">Total Deliveries</p>
+          <div className="grid gap-6 md:grid-cols-4">
+            <div className="text-center p-6 rounded-lg bg-primary/10 hover:bg-primary/20 transition-all duration-200 border border-primary/20">
+              <div className="text-3xl font-bold text-primary mb-2">{profileStats.totalDeliveries}</div>
+              <p className="text-sm text-muted-foreground font-semibold">Total Deliveries</p>
             </div>
             
-            <div className="text-center p-4 rounded-lg bg-secondary/10">
-              <div className="text-2xl font-bold text-secondary">{profileStats.rating}</div>
-              <p className="text-sm text-muted-foreground">Average Rating</p>
+            <div className="text-center p-6 rounded-lg bg-secondary/10 hover:bg-secondary/20 transition-all duration-200 border border-secondary/20">
+              <div className="text-3xl font-bold text-secondary mb-2">{profileStats.rating}</div>
+              <p className="text-sm text-muted-foreground font-semibold">Average Rating</p>
             </div>
             
-            <div className="text-center p-4 rounded-lg bg-accent/10">
-              <div className="text-2xl font-bold text-accent">96%</div>
-              <p className="text-sm text-muted-foreground">On-Time Rate</p>
+            <div className="text-center p-6 rounded-lg bg-accent/10 hover:bg-accent/20 transition-all duration-200 border border-accent/20">
+              <div className="text-3xl font-bold text-accent mb-2">96%</div>
+              <p className="text-sm text-muted-foreground font-semibold">On-Time Rate</p>
             </div>
             
-            <div className="text-center p-4 rounded-lg bg-muted">
-              <div className="text-2xl font-bold text-foreground">{profileStats.joinDate}</div>
-              <p className="text-sm text-muted-foreground">Partner Since</p>
+            <div className="text-center p-6 rounded-lg bg-muted/50 hover:bg-muted transition-all duration-200 border">
+              <div className="text-3xl font-bold text-foreground mb-2">{profileStats.joinDate}</div>
+              <p className="text-sm text-muted-foreground font-semibold">Partner Since</p>
             </div>
           </div>
         </CardContent>

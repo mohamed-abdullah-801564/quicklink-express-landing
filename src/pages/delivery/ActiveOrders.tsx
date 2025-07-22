@@ -48,61 +48,61 @@ const ActiveOrders = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground mb-2">Active Orders</h1>
-        <p className="text-muted-foreground">Manage your current deliveries</p>
+    <div className="space-y-8">
+      <div className="animate-slide-up">
+        <h1 className="text-3xl font-bold text-foreground mb-3">Active Orders</h1>
+        <p className="text-muted-foreground text-lg">Manage your current deliveries</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {orders.map((order) => (
-          <Card key={order.id} className="hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">{order.customerName}</CardTitle>
-                <Badge variant={order.statusColor as any} className="text-xs">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {orders.map((order, index) => (
+          <Card key={order.id} className="hover:shadow-elegant transition-all duration-300 hover:scale-[1.03] animate-slide-up border-l-4 border-l-primary/20" style={{ animationDelay: `${index * 100}ms` }}>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between mb-2">
+                <CardTitle className="text-xl font-semibold">{order.customerName}</CardTitle>
+                <Badge variant={order.statusColor as any} className="text-xs font-medium px-3 py-1">
                   {order.status}
                 </Badge>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                <span>{order.orderTime}</span>
-                <span className="text-xs bg-muted px-2 py-1 rounded">
+                <span className="font-medium">{order.orderTime}</span>
+                <span className="text-xs bg-muted px-3 py-1 rounded-full font-semibold">
                   {order.id}
                 </span>
               </div>
             </CardHeader>
             
-            <CardContent className="space-y-4">
-              <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" />
-                <p className="text-sm text-foreground">{order.address}</p>
+            <CardContent className="space-y-5">
+              <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                <MapPin className="h-5 w-5 mt-0.5 text-primary flex-shrink-0" />
+                <p className="text-sm text-foreground font-medium leading-relaxed">{order.address}</p>
               </div>
               
-              <div>
-                <p className="text-sm font-medium text-foreground mb-2">Order Items:</p>
-                <ul className="text-sm text-muted-foreground space-y-1">
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-foreground">Order Items:</p>
+                <ul className="text-sm text-muted-foreground space-y-2">
                   {order.items.map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <span className="w-2 h-2 bg-primary rounded-full mr-2 flex-shrink-0"></span>
-                      {item}
+                    <li key={index} className="flex items-center p-2 bg-background rounded-md border">
+                      <span className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></span>
+                      <span className="font-medium">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               
-              <div className="flex gap-2 pt-2">
-                <Button size="sm" className="flex-1 flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row gap-3 pt-3">
+                <Button size="sm" className="flex-1 flex items-center gap-2 font-semibold hover:scale-105 transition-transform">
                   <Phone className="h-4 w-4" />
                   Call Customer
                 </Button>
                 {order.status === "Pending Pickup" && (
-                  <Button variant="secondary" size="sm" className="flex-1">
+                  <Button variant="secondary" size="sm" className="flex-1 font-semibold hover:scale-105 transition-transform">
                     Mark Picked Up
                   </Button>
                 )}
                 {order.status === "In Transit" && (
-                  <Button variant="secondary" size="sm" className="flex-1">
+                  <Button variant="secondary" size="sm" className="flex-1 font-semibold hover:scale-105 transition-transform">
                     Mark Delivered
                   </Button>
                 )}

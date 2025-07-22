@@ -37,30 +37,30 @@ const DeliveryDashboard = () => {
       isVisible ? "opacity-100" : "opacity-0"
     }`}>
       {/* Top Bar */}
-      <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4 lg:px-6">
+      <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4 lg:px-8 shadow-sm">
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden"
+            className="lg:hidden hover:scale-110 transition-transform"
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
           <div className="flex items-center gap-3">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-primary text-primary-foreground">
+            <Avatar className="h-10 w-10 ring-2 ring-primary/20">
+              <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
                 DP
               </AvatarFallback>
             </Avatar>
-            <div>
-              <p className="text-sm font-medium text-foreground">Hello, Rajesh Kumar</p>
+            <div className="hidden sm:block">
+              <p className="text-sm font-semibold text-foreground">Hello, Rajesh Kumar</p>
               <p className="text-xs text-muted-foreground">Partner #DP001</p>
             </div>
           </div>
         </div>
         <Link to="/delivery-login">
-          <Button variant="ghost" size="sm" className="flex items-center gap-2">
+          <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:scale-110 transition-all">
             <LogOut className="h-4 w-4" />
             <span className="hidden sm:inline">Logout</span>
           </Button>
@@ -69,10 +69,10 @@ const DeliveryDashboard = () => {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className={`bg-card border-r border-border transition-all duration-300 ${
+        <aside className={`bg-card border-r border-border transition-all duration-300 shadow-sm ${
           sidebarOpen ? "w-64" : "w-0 lg:w-16"
-        } ${sidebarOpen ? "block" : "hidden lg:block"}`}>
-          <nav className="p-4 space-y-2">
+        } ${sidebarOpen ? "block" : "hidden lg:block"} lg:min-h-[calc(100vh-4rem)]`}>
+          <nav className="p-4 lg:p-6 space-y-3">
             {menuItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -80,16 +80,16 @@ const DeliveryDashboard = () => {
                 <Button
                   key={item.id}
                   variant={isActive ? "secondary" : "ghost"}
-                  className={`w-full justify-start transition-all duration-200 ${
-                    sidebarOpen ? "px-3" : "px-2 lg:px-3"
-                  }`}
+                  className={`w-full justify-start transition-all duration-300 hover:scale-105 ${
+                    sidebarOpen ? "px-4 py-3 h-12" : "px-2 lg:px-3 h-12"
+                  } ${isActive ? "shadow-md" : ""}`}
                   onClick={() => {
                     setActiveTab(item.id);
-                    setSidebarOpen(false);
+                    if (window.innerWidth < 1024) setSidebarOpen(false);
                   }}
                 >
-                  <Icon className="h-5 w-5 mr-3" />
-                  {sidebarOpen && <span>{item.label}</span>}
+                  <Icon className="h-5 w-5 lg:mr-3" />
+                  {sidebarOpen && <span className="font-medium">{item.label}</span>}
                 </Button>
               );
             })}
@@ -97,8 +97,8 @@ const DeliveryDashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 lg:p-6">
-          <div className="animate-fade-in">
+        <main className="flex-1 p-4 lg:p-8 bg-muted/30 min-h-[calc(100vh-4rem)]">
+          <div className="animate-fade-in max-w-7xl mx-auto">
             {renderContent()}
           </div>
         </main>
